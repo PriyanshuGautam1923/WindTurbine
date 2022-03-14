@@ -1,12 +1,16 @@
 let labels = [];
 let labels2 = [];
+let labels3 = [];
+let maxspeed = [];
 let data2;
 let config2;
 let slice;
+let monthName;
 let myChart2 = 0;
 const input_number = document.getElementById("datapoints");
+const input_month = document.getElementById("month");
 const btnPlot = document.getElementsByClassName("plot")[0];
-const x = [
+const oct = [
   1.6, 1.6, 1.6, 1.6, 1.6, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 4.8, 4.8, 4.8,
   4.8, 4.8, 3.2, 4.8, 4.8, 4.8, 4.8, 6.4, 0.0, 6.4, 3.2, 3.2, 3.2, 3.2, 4.8,
   1.6, 1.6, 1.6, 1.6, 3.2, 6.4, 6.4, 4.8, 1.6, 0.0, 0.0, 0.0, 0.0, 0.0, 1.6,
@@ -117,7 +121,7 @@ const x = [
   6.4, 4.8, 4.8, 6.4, 4.8, 4.8, 4.8, 4.8, 3.2, 3.2, 3.2, 3.2, 3.2, 1.6, 3.2,
   3.2, 4.8, 6.4, 8.0, 6.4, 3.2, 1.6, 1.6, 1.6, 0.0, 3.2,
 ];
-const x3 = [
+const nov = [
   4.8, 3.2, 1.6, 3.2, 4.8, 4.8, 4.8, 4.8, 8.0, 6.4, 6.4, 6.4, 6.4, 8.0, 9.7,
   8.0, 8.0, 9.7, 8.0, 6.4, 4.8, 3.2, 4.8, 4.8, 4.8, 3.2, 4.8, 1.6, 1.6, 3.2,
   1.6, 1.6, 0.0, 3.2, 6.4, 4.8, 1.6, 1.6, 1.6, 1.6, 0.0, 3.2, 0.0, 1.6, 1.6,
@@ -216,7 +220,7 @@ const x3 = [
   3.2, 3.2, 3.2, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 3.2, 3.2, 4.8, 4.8, 1.6,
   0.0, 1.6, 1.6, 6.4, 6.4,
 ];
-const x5 = [
+const jan = [
   4.8, 3.2, 3.2, 3.2, 1.6, 1.6, 1.6, 1.6, 4.8, 4.8, 3.2, 1.6, 3.2, 3.2, 3.2,
   3.2, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 3.2, 3.2, 3.2, 1.6, 1.6, 4.8,
   1.6, 1.6, 1.6, 1.6, 3.2, 4.8, 3.2, 3.2, 1.6, 1.6, 1.6, 1.6, 1.6, 6.4, 6.4,
@@ -319,7 +323,7 @@ const x5 = [
   3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 4.8, 4.8, 4.8, 3.2, 1.6, 1.6, 1.6, 1.6, 3.2,
   8.0, 9.7, 11.3, 9.7, 8.0, 6.4, 4.8, 4.8, 3.2, 3.2,
 ];
-const x4 = [
+const dec = [
   4.8, 4.8, 3.2, 1.6, 4.8, 4.8, 3.2, 3.2, 3.2, 4.8, 4.8, 3.2, 3.2, 4.8, 3.2,
   4.8, 3.2, 3.2, 1.6, 1.6, 3.2, 3.2, 3.2, 4.8, 6.4, 3.2, 3.2, 3.2, 1.6, 3.2,
   1.6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.2, 4.8, 4.8, 4.8, 6.4, 6.4, 8.0, 8.0,
@@ -422,7 +426,7 @@ const x4 = [
   1.6, 1.6, 3.2, 1.6, 1.6, 1.6, 1.6, 1.6, 3.2, 3.2, 9.7, 6.4, 6.4, 4.8, 4.8,
   6.4, 6.4, 6.4, 4.8,
 ];
-const x7 = [
+const mar = [
   8.0, 9.7, 9.7, 8.0, 3.2, 0.0, 1.6, 0.0, 1.6, 3.2, 4.8, 8.0, 4.8, 6.4, 4.8,
   4.8, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 4.8, 6.4, 4.8, 3.2, 4.8, 4.8, 3.2, 4.8,
   3.2, 3.2, 3.2, 4.8, 4.8, 9.7, 11.3, 14.5, 16.1, 11.3, 8.0, 6.4, 8.0, 8.0, 9.7,
@@ -491,7 +495,7 @@ const x7 = [
   6.4, 8.0, 6.4, 3.2, 1.6, 1.6, 3.2, 3.2, 3.2, 1.6, 8.0, 8.0, 3.2, 3.2, 3.2,
   4.8, 8.0, 6.4, 8.0, 8.0, 9.7, 8.0, 8.0, 9.7, 3.2, 4.8, 9.7, 8.0,
 ];
-const x6 = [
+const feb = [
   4.8, 3.2, 1.6, 0.0, 0.0, 3.2, 3.2, 4.8, 4.8, 6.4, 3.2, 3.2, 3.2, 3.2, 3.2,
   3.2, 1.6, 1.6, 1.6, 1.6, 1.6, 3.2, 3.2, 4.8, 3.2, 4.8, 3.2, 4.8, 4.8, 4.8,
   6.4, 6.4, 4.8, 3.2, 4.8, 9.7, 11.3, 9.7, 6.4, 9.7, 9.7, 8.0, 4.8, 3.2, 3.2,
@@ -584,7 +588,7 @@ const x6 = [
   6.4, 4.8, 3.2, 3.2, 3.2, 1.6, 4.8, 6.4, 4.8, 3.2, 6.4, 9.7, 6.4, 8.0, 8.0,
   9.7, 8.0, 6.4, 6.4,
 ];
-const x2 = [
+const apr = [
   9.7, 14.5, 14.5, 11.3, 9.7, 9.7, 11.3, 9.7, 12.9, 9.7, 8.0, 8.0, 9.7, 11.3,
   11.3, 12.9, 12.9, 12.9, 9.7, 11.3, 11.3, 12.9, 14.5, 17.7, 16.1, 16.1, 17.7,
   17.7, 19.3, 20.9, 20.9, 22.5, 22.5, 24.1, 22.5, 20.9, 19.3, 20.9, 20.9, 20.9,
@@ -689,13 +693,59 @@ const x2 = [
   22.5, 22.5, 24.1, 22.5, 25.7, 27.4, 25.7, 19.3, 11.3, 19.3, 22.5, 20.9, 24.1,
   14.5, 3.2, 3.2, 6.4, 8.0, 11.3, 6.4, 8.0,
 ];
-
+const shaftSpeed = [];
+for (i = 0; i < 100; i++) {
+  let temp = Math.floor(Math.random() * 50);
+  let j = i;
+  if (temp > 45) {
+    shaftSpeed[i++] = temp;
+    while (i <= j + 4) {
+      shaftSpeed[i] = 0;
+      i++;
+    }
+  } else {
+    shaftSpeed[i] = temp;
+  }
+}
+// console.log(shaftSpeed);
+for (i = 0; i < shaftSpeed.length; i++) {
+  if (shaftSpeed[i] === undefined) {
+    shaftSpeed[i] = 3.89;
+  }
+}
 btnPlot.addEventListener("click", function () {
+  slice = +input_number.value;
+  monthName = input_month.value;
+
   labels2 = [];
   if (myChart2) {
     myChart2.destroy();
   }
-  slice = +input_number.value;
+
+  if (monthName === "apr") {
+    x2 = apr;
+  }
+  if (monthName === "mar") {
+    x2 = mar;
+  }
+  if (monthName === "feb") {
+    x2 = feb;
+  }
+  if (monthName === "jan") {
+    x2 = apr;
+  }
+  if (monthName === "dec") {
+    x2 = dec;
+  }
+  if (monthName === "nov") {
+    x2 = nov;
+  }
+  if (monthName === "oct") {
+    x2 = oct;
+  }
+  if (monthName === "shaftspeed") {
+    x2 = shaftSpeed;
+  }
   let y = [];
   y = x2.filter((_, index) => {
     return index < slice;
@@ -708,28 +758,49 @@ btnPlot.addEventListener("click", function () {
   let avgarr = [];
   for (i = 0; i < slice; i++) {
     avgarr[i] = avg;
+    maxspeed[i] = 45;
+  }
+  let maxarr = [];
+  for (i = 0; i < slice; i++) {
+    maxarr[i] = Math.max(...x2);
   }
   console.log(avg);
   for (i = 0; i < y.length; i++) {
     labels2.push(i);
   }
+
   data2 = {
     labels: labels2,
     datasets: [
       {
-        label: "My First dataset",
+        label: "Data",
         backgroundColor: "rgb(255, 99, 132)",
         borderColor: "rgb(255, 99, 132)",
         data: y,
       },
       {
-        label: "My Second dataset",
+        label: "Maximum Recorded Value",
         backgroundColor: "rgb(0, 0, 255)",
         borderColor: "rgb(0, 0, 255)",
+        data: maxarr,
+      },
+      {
+        label: "Average Value",
+        backgroundColor: "rgb(0, 0, 0)",
+        borderColor: "rgb(0, 0, 0)",
         data: avgarr,
+      },
+      {
+        label: "Standard Speed",
+        backgroundColor: "rgb(150, 150, 0)",
+        borderColor: "rgb(0, 150, 150)",
+        data: maxspeed,
       },
     ],
   };
+  if (monthName !== "shaftspeed") {
+    data2.datasets.pop();
+  }
   config2 = {
     type: "line",
     data: data2,
