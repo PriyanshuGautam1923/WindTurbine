@@ -3,6 +3,7 @@ let labels2 = [];
 let labels3 = [];
 let maxspeed = [];
 let data2;
+let power = [];
 let config2;
 let slice;
 let monthName;
@@ -693,6 +694,7 @@ const apr = [
   22.5, 22.5, 24.1, 22.5, 25.7, 27.4, 25.7, 19.3, 11.3, 19.3, 22.5, 20.9, 24.1,
   14.5, 3.2, 3.2, 6.4, 8.0, 11.3, 6.4, 8.0,
 ];
+// Code for shaft speed
 const shaftSpeed = [];
 for (i = 0; i < 100; i++) {
   let temp = Math.floor(Math.random() * 50);
@@ -713,10 +715,29 @@ for (i = 0; i < shaftSpeed.length; i++) {
     shaftSpeed[i] = 3.89;
   }
 }
+//Code for Power Consumption
+
+for (i = 0; i < 100; i++) {
+  let min = -50;
+  let max = 100;
+  let difference = max - min;
+
+  // generate random number
+  let temp = Math.random();
+
+  // multiply with difference
+  temp = Math.floor(temp * difference);
+
+  // add with min value
+  temp = temp + min;
+  console.log(temp);
+  power[i] = temp;
+}
+console.log(power);
 btnPlot.addEventListener("click", function () {
   slice = +input_number.value;
   monthName = input_month.value;
-
+  console.log(power);
   labels2 = [];
   if (myChart2) {
     myChart2.destroy();
@@ -732,7 +753,7 @@ btnPlot.addEventListener("click", function () {
     x2 = feb;
   }
   if (monthName === "jan") {
-    x2 = apr;
+    x2 = jan;
   }
   if (monthName === "dec") {
     x2 = dec;
@@ -745,6 +766,9 @@ btnPlot.addEventListener("click", function () {
   }
   if (monthName === "shaftspeed") {
     x2 = shaftSpeed;
+  }
+  if (monthName === "power") {
+    x2 = power;
   }
   let y = [];
   y = x2.filter((_, index) => {
