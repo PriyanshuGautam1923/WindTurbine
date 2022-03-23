@@ -9,7 +9,26 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <h1 class="text-center">Wind Speed Data</h1>
+    <!-- <div id="pg1Overlay"></div> -->
+    <div id="pg1">
+      <div class="navbar">
+        <div class="nav-left">
+          <img class="logo" src="./IIT_Kharagpur_Logo.svg.png" />
+        </div>
+        <div class="nav-right">
+          <div class="sections">Home</div>
+          <div class="sections">About</div>
+          <div class="sections">Our Team</div>
+          <div class="sections">Main</div>
+        </div>
+      </div>
+      <div class="projectName">
+        <h1 class="name">Chakra Sindhu</h1>
+        <br />
+        <h2 class="type">Horizontal Axis Wind Turbine</h2>
+      </div>
+    </div>
+    <!-- <h1 class="text-center">Wind Turbine Portal</h1>
     <div class="plotDirections">
       <label>No. of data points to be taken</label>
       <input id="datapoints" /><br /><br />
@@ -18,10 +37,26 @@
       <button class="plot">Plot</button>
     </div>
     <div>
-      <canvas id="mainChart"></canvas>
+       <canvas id="mainChart"></canvas>
       <canvas id="secondChart"></canvas>
-      <canvas id="thirdChart"></canvas>
+      <canvas id="thirdChart"></canvas> 
     </div>
+     <label>The total angle rotated</label>
+    <input type="text" id="angle" value="20" />
+    <button type="button" id="btnGo">Go!</button> 
+    <div style="display: flex;">
+       <img src="DirLegend.jpg"style="width: 600px;" /> 
+    <div class="compass"><img src="arrow.png" id="needle"></img></div>
+    </div>
+    
+     <i class="fa-solid fa-arrow-right-long"></i> 
+    <i class="fa-solid fa-arrow-right"></i> 
+    <div id="totalAngle"></div> -->
+    <script
+      src="https://kit.fontawesome.com/c6d6973d4d.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="index.js"></script>
   </body>

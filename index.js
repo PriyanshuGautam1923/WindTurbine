@@ -1,16 +1,18 @@
+/* const input_number = document.getElementById("datapoints");
+const input_month = document.getElementById("month");
+const btnPlot = document.getElementsByClassName("plot")[0];
 let labels = [];
 let labels2 = [];
-let labels3 = [];
+const shaftSpeed = [];
+let power = [];
 let maxspeed = [];
 let data2;
-let power = [];
+
 let config2;
 let slice;
 let monthName;
 let myChart2 = 0;
-const input_number = document.getElementById("datapoints");
-const input_month = document.getElementById("month");
-const btnPlot = document.getElementsByClassName("plot")[0];
+
 const oct = [
   1.6, 1.6, 1.6, 1.6, 1.6, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 4.8, 4.8, 4.8,
   4.8, 4.8, 3.2, 4.8, 4.8, 4.8, 4.8, 6.4, 0.0, 6.4, 3.2, 3.2, 3.2, 3.2, 4.8,
@@ -695,49 +697,51 @@ const apr = [
   14.5, 3.2, 3.2, 6.4, 8.0, 11.3, 6.4, 8.0,
 ];
 // Code for shaft speed
-const shaftSpeed = [];
-for (i = 0; i < 100; i++) {
-  let temp = Math.floor(Math.random() * 50);
-  let j = i;
-  if (temp > 45) {
-    shaftSpeed[i++] = temp;
-    while (i <= j + 4) {
-      shaftSpeed[i] = 0;
-      i++;
+const shaftSpeedCreater = function () {
+  for (i = 0; i < 100; i++) {
+    let temp = Math.floor(Math.random() * 50);
+    let j = i;
+    if (temp > 45) {
+      shaftSpeed[i++] = temp;
+      while (i <= j + 4) {
+        shaftSpeed[i] = 0;
+        i++;
+      }
+    } else {
+      shaftSpeed[i] = temp;
     }
-  } else {
-    shaftSpeed[i] = temp;
   }
-}
-// console.log(shaftSpeed);
-for (i = 0; i < shaftSpeed.length; i++) {
-  if (shaftSpeed[i] === undefined) {
-    shaftSpeed[i] = 3.89;
+  // console.log(shaftSpeed);
+  for (i = 0; i < shaftSpeed.length; i++) {
+    if (shaftSpeed[i] === undefined) {
+      shaftSpeed[i] = 3.89;
+    }
   }
-}
+};
 //Code for Power Consumption
+const PowerConsumptionCreater = function () {
+  for (i = 0; i < 100; i++) {
+    let min = -50;
+    let max = 100;
+    let difference = max - min;
 
-for (i = 0; i < 100; i++) {
-  let min = -50;
-  let max = 100;
-  let difference = max - min;
+    // generate random number
+    let temp = Math.random();
 
-  // generate random number
-  let temp = Math.random();
+    // multiply with difference
+    temp = Math.floor(temp * difference);
 
-  // multiply with difference
-  temp = Math.floor(temp * difference);
-
-  // add with min value
-  temp = temp + min;
-  console.log(temp);
-  power[i] = temp;
-}
-console.log(power);
+    // add with min value
+    temp = temp + min;
+    console.log(temp);
+    power[i] = temp;
+  }
+};
+// console.log(power);
 btnPlot.addEventListener("click", function () {
   slice = +input_number.value;
   monthName = input_month.value;
-  console.log(power);
+  // console.log(power);
   labels2 = [];
   if (myChart2) {
     myChart2.destroy();
@@ -765,9 +769,11 @@ btnPlot.addEventListener("click", function () {
     x2 = oct;
   }
   if (monthName === "shaftspeed") {
+    shaftSpeedCreater();
     x2 = shaftSpeed;
   }
   if (monthName === "power") {
+    PowerConsumptionCreater();
     x2 = power;
   }
   let y = [];
@@ -855,4 +861,86 @@ const config = {
   options: {},
 };
 
-const myChart = new Chart(document.getElementById("mainChart"), config);
+const myChart = new Chart(document.getElementById("mainChart"), config); */
+// Get references to DOM elements
+const dirData = [
+  202.5, 180, 180, 180, 202.5, 157.5, 157.5, 157.5, 157.5, 157.5, 157.5, 157.5,
+  157.5, 157.5, 157.5, 247.5, 135, 225, 225, 157.5, 157.5, 135, 157.5, 202.5,
+  135, 135, 157.5, 157.5, 157.5, 157.5, 157.5, 135, 135, 157.5, 135, 180, 157.5,
+  157.5, 180, 157.5, 180, 180, 180, 180, 157.5, 135, 157.5, 135, 157.5, 135,
+  135, 157.5, 180, 180, 202.5, 202.5, 202.5, 225, 225, 225, 180, 202.5, 202.5,
+  225, 157.5, 180, 157.5, 225, 180, 157.5, 157.5, 157.5, 135, 157.5, 157.5,
+  157.5, 157.5, 157.5, 157.5, 157.5, 135, 135, 135, 157.5, 157.5, 157.5, 180,
+  157.5, 157.5, 135, 157.5, 135, 135, 157.5, 135, 157.5, 135, 157.5, 157.5,
+  157.5, 157.5, 157.5, 157.5, 157.5, 157.5, 135, 157.5, 157.5, 135, 157.5,
+  202.5, 157.5, 157.5, 157.5, 180, 135, 157.5, 157.5, 157.5, 157.5, 157.5,
+  157.5, 157.5, 135, 135, 157.5, 135, 157.5, 135, 135, 157.5, 135, 135, 157.5,
+  180, 157.5, 157.5, 157.5, 135, 157.5, 135, 157.5, 180, 180, 202.5, 202.5,
+  202.5, 202.5, 202.5, 202.5, 202.5, 225, 225, 180, 157.5, 157.5, 202.5, 180,
+  337.5, 180, 225, 202.5, 202.5, 157.5, 157.5, 157.5, 157.5, 157.5, 157.5,
+  157.5, 157.5, 135, 135, 157.5, 180, 180, 180, -1, 180, 180, 180, 180, 180,
+  202.5, 202.5, 157.5, 202.5, 157.5, 180, 180, 180, 202.5, 180, 180, 202.5,
+  202.5, 180, 202.5, 202.5, 202.5, 202.5, 157.5, 157.5, 157.5, 157.5, 157.5,
+  157.5, 157.5, 135, 135, 157.5, 135, 135, 135, 157.5, 135, 157.5, 157.5, 157.5,
+  157.5, 135, 135, 135, 135, 157.5, 135, 180, 180, 157.5, 157.5, 157.5, 135,
+  135, 180, 202.5, 135, 157.5, 157.5, 135, 157.5, 157.5, 202.5, 202.5, 247.5,
+  45, 67.5, 67.5, 45, 67.5, 45, 157.5, 90, 135, 157.5, 180, 247.5, 292.5, 247.5,
+  180, 157.5, 157.5, 135, 157.5, 157.5, 157.5, 180, 292.5, 292.5, 67.5, 22.5,
+  45, 22.5, 67.5, 90, 67.5, 22.5, 45, 67.5, 67.5, 67.5, 90, 45, 45, 67.5, 22.5,
+  45, 45, 22.5, 45, 45, 22.5, 22.5, 22.5, 22.5, 22.5, 22.5, 45, 270, 45, 270,
+  45, 45, 157.5, 157.5, 157.5, 157.5, 202.5, 67.5, 247.5, 22.5, 67.5, 45, 45,
+  112.5, 112.5, 45, 22.5, 22.5, 22.5, 45, 45, 67.5, 67.5, 67.5, 22.5, 45, 45,
+  45, 67.5, 67.5, 45, 22.5, 45, 45, 45, 45, 67.5, 45, 45, 45, 67.5, 45, 22.5,
+  270, 270, 202.5, 270, 22.5, 45, 225, 180, 180, 202.5, 180, 180, 180, 157.5,
+  135, 157.5, 180, 180, 180, 157.5, 135, 135, 135, 135, 157.5, 180, 202.5,
+  202.5, 337.5, 112.5, 67.5, 157.5, 135, 90, 157.5, 135, 112.5, 112.5, 90, 90,
+  90, 90, 247.5, 90, 180, 157.5, 157.5, 202.5, 157.5, 157.5, 157.5, 135, 135,
+  180, 157.5, 135, 135, 157.5, 157.5, 157.5, 157.5, 135, 135, 135, 135, 157.5,
+  135, 135, 135, 135, 157.5, 135, 157.5, 157.5, 135, 135, 135, 180, 202.5, 180,
+  157.5, 157.5, 157.5, 157.5, 157.5, 157.5, 135, 157.5, 247.5, 135, 157.5, 135,
+  157.5, 157.5, 157.5, 135, 135, 157.5, 157.5, 180, 157.5, 180, 157.5, 157.5,
+  135, 135, 157.5, 157.5, 135, 135, 135, 135, 135, 135, 157.5, 157.5, 135, 135,
+  135, 157.5, 157.5, 135, 157.5, 135, 135, 135, 157.5, 180, 202.5, 202.5, 157.5,
+  135, 135, 135, 180, 202.5, 157.5, 135, 135, 157.5, 157.5, 135, 135, 157.5,
+  180, 180, 157.5, 157.5, 180, 225, 202.5, 157.5, 157.5, 135, 157.5, 157.5, 135,
+  157.5, 157.5, 157.5, 157.5, 135, 157.5, 157.5, 157.5, 157.5, 180, 157.5,
+  157.5, 157.5, 202.5, 180, 180, 180, 202.5, 180, 157.5, 180, 157.5, 157.5,
+  157.5, 157.5, 157.5, 157.5, 157.5, 157.5, 157.5, 135, 180, 180, 180, 180,
+  157.5, 180, 157.5, 157.5, 157.5, 157.5, 157.5, 135, 135, 135, 157.5, 157.5,
+  135, 135, 135, 135, 157.5, 157.5, 157.5, 180, 180, 157.5, 202.5, 180, 157.5,
+  202.5, 225, 225, 225, 225, 180, 202.5, 202.5, 180, 180, 157.5, 135, 157.5,
+  157.5, 157.5, 292.5, 180, 180, 135, 180, 202.5, 157.5, 202.5, 157.5, 157.5,
+  -1, 135, 157.5, 247.5, 202.5, 157.5, 157.5, 135, 135, 135, 157.5, 157.5, 180,
+  180, 202.5, 225, 247.5, 247.5, 270, 157.5, 157.5, 157.5, 157.5, 180, 180, 180,
+  112.5, 180, 135, 45, 22.5, 45, 45, 67.5, 90, 90, 90, 90, 45, 157.5, 202.5, 90,
+  202.5, 202.5, 157.5, 157.5, 180, 157.5, 180, 180, 157.5, 157.5, 157.5, 157.5,
+  135, 135, 157.5, 180, 157.5, 180, 202.5, 202.5, 180, 180, 157.5, 135, 157.5,
+  157.5, 157.5, 157.5, 180, 180, 180, 180, 90, 90, 90, 67.5, 67.5, 67.5, 45,
+  67.5, 45, 67.5, 45, 45, 45, -1, 22.5, 22.5, 22.5, 22.5, 22.5, 22.5, 45, 45,
+  270, 180, 180, 157.5, 180, 157.5, 135, 135, 135, 135, 135, 135, 135, 135,
+  157.5, 157.5, 135, 135, 157.5, 135, 135, 135, 180, 157.5, 67.5,
+];
+var input = document.getElementById("angle");
+var btn = document.getElementById("btnGo");
+var needle = document.getElementById("needle");
+var totangle = document.getElementById("totalAngle");
+// Set up click event handler
+// btn.addEventListener("click", start_animation);
+
+// Storage for the previous angle
+var lastAngle = "";
+let p = 0;
+setInterval(start_animation, 500);
+function start_animation() {
+  // Update the total angle needed
+  // lastAngle = +lastAngle + +input.value;
+  lastAngle = dirData[p];
+  totangle.innerHTML = `${Math.floor(lastAngle % 360)} degrees`;
+  // For testing:
+  console.clear();
+  console.log("Current total angle: " + lastAngle);
+
+  // Move the needle:
+  needle.style.transform = "rotate(" + lastAngle + "deg)";
+  p++;
+}
