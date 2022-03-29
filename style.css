@@ -86,6 +86,9 @@
 .designteam {
   display: flex;
 }
+.designsupportteam {
+  display: flex;
+}
 .coreproduction {
   display: flex;
 }
